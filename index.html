@@ -45,6 +45,27 @@
       });
       propSelect.on('change', runQuery);
       dateSelect.on('change', runQuery);
+      
+      var script = $('#cq').html();
+      script = $.trim(script);
+      var params = {
+        from_date: '2015-12-01',
+        to_date: '2015-12-01'
+      }
+      MP.api.custom_query(script, params).done(function(results) {
+        console.log(results);
+        // make pretty things
+      });
+    </script>
+    
+    <script type="text/cq" id="cq">
+      function main() {
+        return Events({
+          from_date: params.from_date,
+          to_date: params.to_date
+        })
+        .mixpanel.reducer.count();
+      }
     </script>
   </body>
 </html>
